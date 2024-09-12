@@ -35,17 +35,18 @@ const User = require("../../models/user.model");
     const token = newToken(user._id);
     user.tokens.push({ token });
 
-    const [mailInfo, savedUser] = await Promise.all([
-        sendMail(user.email, "Welcome to TaskApp", welcomeEmail(user.name)),
-        user.save()
-    ]);
+    // const [mailInfo, savedUser] = await Promise.all([
+    //     sendMail(user.email, "Welcome to TaskApp", welcomeEmail(user.name)),
+    //     user.save()
+    // ]);
+
+    await user.save()
 
     return res.status(201).json({
         status: "success",
         data: {
-            savedUser,
+            user,
             token,
-            mailInfo
         }
     });
 });

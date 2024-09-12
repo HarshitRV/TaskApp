@@ -16,7 +16,7 @@ const auth = async (req, res, next) => {
         if (!token) return res.status(400).json({ status: "fail", message: "No token provided" });
         
         const payload = await verifyToken(token);
-      
+        console.log(payload);
         if (!payload) return res.status(400).json({ status: "fail", message: "Invalid token" });
 
         // Find the user with the given id who also has the provided token in his tokens array
